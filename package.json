@@ -4,10 +4,10 @@
   "private": true,
   "author": "Maksym Bozhenov <max.bozh.n1mbo@gmail.com>",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "test:coverage": "react-scripts test --env=jsdom --watchAll=false --coverage",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "test:coverage": "react-app-rewired test --env=jsdom --watchAll=false --coverage",
     "test:types": "tsc -p . --noEmit",
     "lint": "npm run test:types && eslint '**/*.[jt]s?(x)' --quiet --fix",
     "format": "prettier --write '**/*.[jt]s?(x)'"
@@ -47,6 +47,7 @@
     "husky": "^5.1.3",
     "lint-staged": "^10.5.4",
     "prettier": "^2.2.1",
+    "react-app-rewired": "^2.1.8",
     "react-scripts": "4.0.3",
     "typescript": "^4.2.3"
   },
