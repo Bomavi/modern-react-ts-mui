@@ -1,31 +1,96 @@
 {
-  "name": "my-app",
+  "name": "modern-react-ts-mui",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "@types/jest": "^26.0.15",
-    "@types/node": "^12.0.0",
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-scripts": "4.0.3",
-    "typescript": "^4.1.2",
-    "web-vitals": "^1.0.1"
-  },
+  "author": "Maksym Bozhenov <max.bozh.n1mbo@gmail.com>",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test:coverage": "react-scripts test --env=jsdom --watchAll=false --coverage",
+    "test:types": "tsc -p . --noEmit",
+    "lint": "npm run test:types && eslint '**/*.[jt]s?(x)' --quiet --fix",
+    "format": "prettier --write '**/*.[jt]s?(x)'"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.11.3",
+    "@material-ui/icons": "^4.11.2",
+    "classnames": "^2.2.6",
+    "history": "^5.0.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-intl": "^5.13.2",
+    "react-router-dom": "^5.2.0",
+    "web-vitals": "^1.1.0"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.11.9",
+    "@testing-library/react": "^11.2.5",
+    "@testing-library/react-hooks": "^5.1.0",
+    "@testing-library/user-event": "^12.8.3",
+    "@types/classnames": "^2.2.11",
+    "@types/jest": "^26.0.20",
+    "@types/node": "^14.14.32",
+    "@types/react": "^17.0.3",
+    "@types/react-dom": "^17.0.2",
+    "@types/react-router-dom": "^5.1.7",
+    "@typescript-eslint/eslint-plugin": "^4.17.0",
+    "@typescript-eslint/parser": "^4.17.0",
+    "concurrently": "^6.0.0",
+    "eslint": "^7.21.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-config-react-app": "^6.0.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^5.1.3",
+    "lint-staged": "^10.5.4",
+    "prettier": "^2.2.1",
+    "react-scripts": "4.0.3",
+    "typescript": "^4.2.3"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
+    ]
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.ts{,x}",
+      "!src/reportWebVitals.ts",
+      "!src/**/index.ts{,x}",
+      "!src/**/constants.ts",
+      "!src/**/constants/**",
+      "!src/**/styles.ts{,x}",
+      "!src/**/types.ts",
+      "!src/**/typings.ts",
+      "!src/typings/**",
+      "!src/**/*.d.ts",
+      "!src/assets",
+      "!src/**/typings/**",
+      "!src/config/**",
+      "!src/**/tests/**"
+    ],
+    "coverageReporters": [
+      "lcov",
+      "text"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "concurrently --raw --kill-others-on-fail \"lint-staged\" \"npm run test:types\"",
+      "pre-push": "npm run test:coverage ${HUSKY_GIT_PARAMS}"
+    }
+  },
+  "lint-staged": {
+    "**/*.ts{,x}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "**/*.{css,json,scss,md}": [
+      "prettier --write"
     ]
   },
   "browserslist": {

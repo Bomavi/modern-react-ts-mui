@@ -1,13 +1,24 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import { StrictMode } from 'react';
+import { render } from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
+import { IntlProvider } from 'react-intl';
+
+import { defaultLanguage, translations } from 'localization';
+
+import { App } from './App';
 import reportWebVitals from './reportWebVitals';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+render(
+  <StrictMode>
+    <IntlProvider
+      locale={defaultLanguage}
+      messages={translations[defaultLanguage]}
+    >
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </IntlProvider>
+  </StrictMode>,
   document.getElementById('root')
 );
 

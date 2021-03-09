@@ -1,9 +1,13 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
-import App from './App';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+import { withIntl } from 'utils/tests/helpers';
+
+import { App } from './App';
+
+describe('App', () => {
+  it('it should be rendered successfully', () => {
+    render(withIntl(<App />)({}));
+
+    expect(screen.queryByTestId('App')).toBeInTheDocument();
+  });
 });
